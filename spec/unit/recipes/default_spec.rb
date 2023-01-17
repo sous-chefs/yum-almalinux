@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe 'yum-almalinux::default' do
+  step_into :yum_alma_baseos
+  step_into :yum_alma_appstream
+  step_into :yum_alma_extras
+
   %w(8).each do |v|
     context "almalinux-#{v}" do
       platform 'almalinux', v
@@ -12,16 +16,16 @@ describe 'yum-almalinux::default' do
       case v.to_i
       when 8
         it do
-          expect(chef_run).to create_yum_repository('base')
-            .with(mirrorlist: 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=os')
+          expect(chef_run).to create_yum_repository('baseos')
+            .with(mirrorlist: 'https://mirrors.almalinux.org/mirrorlist/8/baseos/')
         end
         it do
           expect(chef_run).to create_yum_repository('appstream')
-            .with(mirrorlist: 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=updates')
+            .with(mirrorlist: 'https://mirrors.almalinux.org/mirrorlist/8/appstream/')
         end
         it do
           expect(chef_run).to create_yum_repository('extras')
-            .with(mirrorlist: 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=extras')
+            .with(mirrorlist: 'https://mirrors.almalinux.org/mirrorlist/8/extras/')
         end
       when 9
         it do
@@ -45,6 +49,14 @@ describe 'yum-almalinux::default' do
     it 'converges successfully' do
       expect { chef_run }.to_not raise_error
     end
+    it do
+      expect(chef_run).to_not create_yum_repository('baseos')
+    end
+    it do
+      expect(chef_run).to_not create_yum_repository('appstream')
+    end
+    it do
+      expect(chef_run).to_not create_yum_repository('extras')
+    end
   end
 end
-

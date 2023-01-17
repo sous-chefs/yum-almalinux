@@ -15,7 +15,8 @@ module YumAlmaChef
         "https://mirrors.almalinux.org/mirrorlist/#{node['platform_version'].to_i}/#{repo_slug.downcase}/"
       end
 
-      def alma_repo_description(repo_slug)
+      def alma_repo_description(repo_slug, debug = false)
+        repo_slug = debug ? "#{repo_slug}-debuginfo" : repo_slug
         "AlmaLinux #{node['platform_version'].to_i} - #{repo_slug}"
       end
     end

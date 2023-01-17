@@ -11,13 +11,15 @@ property :description, String, default: lazy { alma_repo_description(repo_name) 
 
 property :debug_baseurl, String, default: lazy { alma_repo_baseurl(repo_name, true) }
 property :debug_mirrorlist, String, default: lazy { alma_repo_mirrorlist(repo_name, true) }
-property :debug_description, String, default: lazy { alma_repo_description("#{repo_name}-debuginfo") }
+property :debug_description, String, default: lazy { alma_repo_description(repo_name, true) }
 
 action_class do
   include YumAlmaChef::Cookbook::Helpers
 end
 
 action :create do
+  return unless platform_family?('rhel')
+
   # remove existing repo configs
   ::Dir['/etc/yum.repos.d/almalinux*'].each do |f|
     file f do
