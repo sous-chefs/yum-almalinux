@@ -2,9 +2,10 @@ control 'common' do
   title 'Common controls'
 
   %w(
-    plus
+    crb
     ha
     nfv
+    plus
     powertools
     resilientstorage
     rt

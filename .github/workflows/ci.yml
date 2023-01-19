@@ -24,6 +24,7 @@ jobs:
       matrix:
         os:
           - almalinux-8
+          - almalinux-9
         suite:
           - default
           - all-repos

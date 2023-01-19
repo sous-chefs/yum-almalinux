@@ -3,7 +3,7 @@ unified_mode true
 
 use '_partials/_common'
 
-repo_name = 'PowerTools'
+repo_name = node['platform_version'].to_i == 8 ? 'PowerTools' : 'CRB'
 
 property :baseurl, String, default: lazy { alma_repo_baseurl(repo_name) }
 property :mirrorlist, String, default: lazy { alma_repo_mirrorlist(repo_name) }

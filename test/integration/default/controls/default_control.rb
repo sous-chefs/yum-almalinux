@@ -23,14 +23,15 @@ control 'default' do
 end
 
   %w(
-plus
-highavailability
-nfv
-powertools
-resilientstorage
-rt
-sap
-saphana
+  crb
+  highavailability
+  nfv
+  plus
+  powertools
+  resilientstorage
+  rt
+  sap
+  saphana
   ).each do |name|
     describe yum.repo name do
       it { should_not exist }
