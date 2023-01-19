@@ -26,6 +26,7 @@ jobs:
           - almalinux-8
         suite:
           - default
+          - all-repos
       fail-fast: false
 
     steps:
