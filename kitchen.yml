@@ -24,3 +24,6 @@ suites:
   - name: all_repos
     run_list:
       - recipe[yum-almalinux-test::all_repos]
+  - name: passthrough
+    run_list:
+      - recipe[yum-almalinux-test::passthrough]

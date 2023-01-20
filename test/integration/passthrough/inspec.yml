@@ -1,0 +1,7 @@
+---
+name: passthrough
+title: Test passing through properties to the inner yum_repository resources
+
+depends:
+  - name: common
+    path: test/integration/common

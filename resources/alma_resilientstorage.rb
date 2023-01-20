@@ -34,6 +34,9 @@ action :create do
     enabled new_resource.enabled
     gpgcheck new_resource.gpgcheck
     gpgkey new_resource.gpgkey
+    new_resource.passthrough.each do |key, value|
+      send(key.to_sym, value)
+    end
   end
 
   yum_repository "#{repo_name.downcase}-debuginfo" do
@@ -43,5 +46,8 @@ action :create do
     enabled new_resource.debug_enabled
     gpgcheck new_resource.gpgcheck
     gpgkey new_resource.gpgkey
+    new_resource.passthrough.each do |key, value|
+      send(key.to_sym, value)
+    end
   end
 end
