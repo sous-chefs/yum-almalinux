@@ -5,12 +5,12 @@ use '_partials/_common'
 
 repo_name = 'SAP'
 
-property :baseurl, String, default: lazy { alma_repo_baseurl(repo_name) }
-property :mirrorlist, String, default: lazy { alma_repo_mirrorlist(repo_name) }
+property :baseurl, [String, nil], default: lazy { alma_repo_baseurl(repo_name) }
+property :mirrorlist, [String, nil], default: lazy { alma_repo_mirrorlist(repo_name) }
 property :description, String, default: lazy { alma_repo_description(repo_name) }
 
-property :debug_baseurl, String, default: lazy { alma_repo_baseurl(repo_name, true) }
-property :debug_mirrorlist, String, default: lazy { alma_repo_mirrorlist(repo_name, true) }
+property :debug_baseurl, [String, nil], default: lazy { alma_repo_baseurl(repo_name, true) }
+property :debug_mirrorlist, [String, nil], default: lazy { alma_repo_mirrorlist(repo_name, true) }
 property :debug_description, String, default: lazy { alma_repo_description(repo_name, true) }
 
 action_class do
