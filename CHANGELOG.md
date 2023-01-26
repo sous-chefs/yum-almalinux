@@ -2,9 +2,20 @@
 
 This file is used to list changes made in each version of the yum-almalinux cookbook.
 
-## 0.1.0
+## Unreleased
 
-Initial release.
+Initial release. Adds resources for the following AlmaLinux repositories:
 
-- change 0
-- change 1
+- BaseOS
+- AppStream
+- Extras
+- HighAvailability
+- NFV
+- Plus
+- PowerTools
+- ResilientStorage
+- RT
+- SAP
+- SAPHANA
+
+Adds default recipe which adds default repos (BaseOS, AppStream, Extras)
