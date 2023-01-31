@@ -28,7 +28,7 @@ jobs:
         suite:
           - default
           - all-repos
-          - extra_options
+          - extra-options
       fail-fast: false
 
     steps:
