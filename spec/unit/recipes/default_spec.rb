@@ -5,6 +5,7 @@ describe 'yum-almalinux::default' do
   step_into :yum_alma_appstream
   step_into :yum_alma_extras
 
+  # TODO: AlmaLinux 9 isn't in fauxhai-ng yet, add tests for 9 once it is added
   %w(8).each do |v|
     context "almalinux-#{v}" do
       platform 'almalinux', v

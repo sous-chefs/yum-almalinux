@@ -51,7 +51,7 @@ It is _highly recommended_ to use the resources directly instead of the recipe. 
 adoption and use, however if customization is needed, you _must_ use the custom resource.
 
 - `yum-almalinux::default` - Generates `yum_repository` configs for latest AlmaLinux release using default settings. By
-  default the `base`, `extras`, and `appstream` repos are enabled on AlmaLinux 8/9. 
+  default the `base`, `extras`, and `appstream` repos are enabled on AlmaLinux 8/9.
 
 ## Resources
 
