@@ -34,7 +34,7 @@ action :create do
     enabled new_resource.enabled
     gpgcheck new_resource.gpgcheck
     gpgkey new_resource.gpgkey
-    new_resource.passthrough.each do |key, value|
+    new_resource.extra_options.each do |key, value|
       send(key.to_sym, value)
     end
   end
@@ -46,7 +46,7 @@ action :create do
     enabled new_resource.debug_enabled
     gpgcheck new_resource.gpgcheck
     gpgkey new_resource.gpgkey
-    new_resource.passthrough.each do |key, value|
+    new_resource.extra_options.each do |key, value|
       send(key.to_sym, value)
     end
   end

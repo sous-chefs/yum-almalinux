@@ -26,11 +26,11 @@ These properties are passed directly through to `yum_repository`. More informati
 | `gpgkey`            | `String`        | `https://repo.almalinux.org/...`, see [`alma_gpg_key`](../libraries/helpers.rb)            |
 | `gpgcheck`          | `true`, `false` | `true`                                                                                     |
 
-The `passthrough` property allows setting additional settings on the internal [`yum_repository`](https://docs.chef.io/resources/yum_repository/) resources.
+The `extra_options` property allows setting additional settings on the internal [`yum_repository`](https://docs.chef.io/resources/yum_repository/) resources.
 
 | Name          | Type | Default |
 | ------------- | ---- | ------- |
-| `passthrough` | Hash | {}      |
+| `extra_options` | Hash | {}      |
 
 ## Examples
 
@@ -38,11 +38,11 @@ The `passthrough` property allows setting additional settings on the internal [`
 yum_alma_nfv 'default'
 ```
 
-Setting passthrough properties:
+Setting extra_options properties:
 
 ```ruby
 yum_alma_nfv 'default' do
   # don't install 'some-package' from this repo
-  passthrough ({ 'exclude' => 'some-package' })
+  extra_options ({ 'exclude' => 'some-package' })
 end
 ```

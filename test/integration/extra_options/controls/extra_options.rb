@@ -1,7 +1,7 @@
 include_controls 'common'
 
-control 'passthrough' do
-  title 'Test passthrough properties'
+control 'extra_options' do
+  title 'Test extra_options properties'
 
   os_release = os.release.to_i
 

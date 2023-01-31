@@ -1,5 +1,5 @@
 ---
-name: passthrough
+name: extra_options
 title: Test passing through properties to the inner yum_repository resources
 
 depends:
