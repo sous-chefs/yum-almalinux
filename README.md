@@ -35,11 +35,11 @@ Below is a table showing which repositoryids we can manage that are shipped by d
 
 ### Platforms
 
-- AlmaLinux 8
+- AlmaLinux 8, 9
 
 ### Chef
 
-- Chef 16+
+- Chef 16.10+
 
 ### Cookbooks
 
@@ -47,8 +47,11 @@ Below is a table showing which repositoryids we can manage that are shipped by d
 
 ## Recipes
 
-- `yum-almalinux::default` - Generates `yum_repository` configs for latest AlmaLinux release. By default the `base`, `extras`,
-  and `appstream` repos are enabled on AlmaLinux 8/9.
+It is _highly recommended_ to use the resources directly instead of the recipe. The recipes are only included to ease
+adoption and use, however if customization is needed, you _must_ use the custom resource.
+
+- `yum-almalinux::default` - Generates `yum_repository` configs for latest AlmaLinux release using default settings. By
+  default the `base`, `extras`, and `appstream` repos are enabled on AlmaLinux 8/9. 
 
 ## Resources
 

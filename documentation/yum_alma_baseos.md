@@ -26,7 +26,7 @@ These properties are passed directly through to `yum_repository`. More informati
 | `gpgkey`            | `String`        | `https://repo.almalinux.org/...`, see [`alma_gpg_key`](../libraries/helpers.rb)            |
 | `gpgcheck`          | `true`, `false` | `true`                                                                                     |
 
-The `passthrough` property allows setting additional settings on the internal `yum_repository` resources.
+The `passthrough` property allows setting additional settings on the internal [`yum_repository`](https://docs.chef.io/resources/yum_repository/) resources.
 
 | Name          | Type | Default |
 | ------------- | ---- | ------- |
