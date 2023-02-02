@@ -28,8 +28,8 @@ These properties are passed directly through to `yum_repository`. More informati
 
 The `extra_options` property allows setting additional settings on the internal [`yum_repository`](https://docs.chef.io/resources/yum_repository/) resources.
 
-| Name          | Type | Default |
-| ------------- | ---- | ------- |
+| Name            | Type | Default |
+| --------------- | ---- | ------- |
 | `extra_options` | Hash | {}      |
 
 ## Examples
@@ -38,7 +38,7 @@ The `extra_options` property allows setting additional settings on the internal 
 yum_alma_rt 'default'
 ```
 
-Setting extra_options properties:
+Setting extra\_options properties:
 
 ```ruby
 yum_alma_rt 'default' do
