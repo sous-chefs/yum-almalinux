@@ -1,0 +1,7 @@
+---
+name: default
+title: Confirm default repositories are enabled and others are disabled
+
+depends:
+  - name: common
+    path: test/integration/common

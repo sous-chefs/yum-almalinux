@@ -1,0 +1,29 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_infra
+  product_name: <%= ENV['CHEF_PRODUCT_NAME'] || 'chef' %>
+  chef_license: accept-no-persist
+  enforce_idempotency: true
+  multiple_converge: 2
+  deprecations_as_errors: true
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: almalinux-8
+  - name: almalinux-9
+
+suites:
+  - name: default
+    run_list:
+      - recipe[yum-almalinux::default]
+  - name: all_repos
+    run_list:
+      - recipe[yum-almalinux-test::all_repos]
+  - name: extra_options
+    run_list:
+      - recipe[yum-almalinux-test::extra_options]

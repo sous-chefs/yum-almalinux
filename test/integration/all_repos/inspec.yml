@@ -1,0 +1,7 @@
+---
+name: all_repos
+title: Test all AlmaLinux repositories
+
+depends:
+  - name: common
+    path: test/integration/common
