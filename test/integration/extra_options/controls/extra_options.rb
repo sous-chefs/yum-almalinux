@@ -37,12 +37,8 @@ control 'extra_options' do
     end
 
     describe yum.repo "#{name}-debuginfo" do
-      it { should exist }
+      it { should_not exist }
       it { should_not be_enabled }
-    end
-
-    describe parse_config_file("/etc/yum.repos.d/#{name}-debuginfo.repo") do
-      its("#{name}-debuginfo") { should include({ 'exclude' => 'abc efg', 'priority' => '10' }) }
     end
   end
 end

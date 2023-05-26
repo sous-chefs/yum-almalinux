@@ -4,6 +4,10 @@ This file is used to list changes made in each version of the yum-almalinux cook
 
 ## Unreleased
 
+- Skip creating disabled debug repos if set to false
+- Fix MDL
+- Update actions
+
 ## 1.0.1 - *2023-05-26*
 
 - Add renovate.json

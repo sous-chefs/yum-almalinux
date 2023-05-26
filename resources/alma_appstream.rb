@@ -49,5 +49,5 @@ action :create do
     new_resource.extra_options.each do |key, value|
       send(key.to_sym, value)
     end
-  end
+  end if new_resource.debug_enabled
 end

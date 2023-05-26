@@ -1,6 +1,6 @@
-[Back to resource list](../README.md#resources)
-
 # `yum_alma_saphana`
+
+[Back to resource list](../README.md#resources)
 
 Adds the `SAPHANA` repo to the YUM / DNF repo list.
 

@@ -34,9 +34,8 @@ control 'all_repos' do
     end
 
     describe yum.repo "#{name}-debuginfo" do
-      it { should exist }
+      it { should_not exist }
       it { should_not be_enabled }
-      its('mirrors') { should cmp "https://mirrors.almalinux.org/mirrorlist/#{os_release}/#{name}-debuginfo/" }
     end
   end
 end

@@ -1,6 +1,6 @@
-[Back to resource list](../README.md#resources)
-
 # `yum_alma_ha`
+
+[Back to resource list](../README.md#resources)
 
 Adds the `HighAvailability` repo to the YUM / DNF repo list.
 

@@ -1,6 +1,6 @@
-[Back to resource list](../README.md#resources)
-
 # `yum_alma_sap`
+
+[Back to resource list](../README.md#resources)
 
 Adds the `SAP` repo to the YUM / DNF repo list.
 
