@@ -31,7 +31,7 @@ describe 'All Resources' do
               )
           end
           it do
-            expect(chef_run).to create_yum_repository("#{repo.downcase}-debuginfo")
+            expect(chef_run).to_not create_yum_repository("#{repo.downcase}-debuginfo")
               .with(
                 mirrorlist: "https://mirrors.almalinux.org/mirrorlist/8/#{repo.downcase}-debuginfo/",
                 baseurl: "https://repo.almalinux.org/almalinux/8/#{repo}/debug/$basearch/os/",

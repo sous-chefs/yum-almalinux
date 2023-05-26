@@ -1,6 +1,6 @@
-[Back to resource list](../README.md#resources)
-
 # `yum_alma_powertools`
+
+[Back to resource list](../README.md#resources)
 
 Adds the `PowerTool` (AlmaLinux 8) or `CRB` (AlmaLinux 9) repo to the YUM / DNF repo list.
 

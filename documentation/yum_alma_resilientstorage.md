@@ -1,6 +1,6 @@
-[Back to resource list](../README.md#resources)
-
 # `yum_alma_resilientstorage`
+
+[Back to resource list](../README.md#resources)
 
 Adds the `ResilientStorage` repo to the YUM / DNF repo list.
 

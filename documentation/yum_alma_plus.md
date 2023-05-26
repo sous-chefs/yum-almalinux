@@ -1,6 +1,6 @@
-[Back to resource list](../README.md#resources)
-
 # `yum_alma_plus`
+
+[Back to resource list](../README.md#resources)
 
 Adds the `Plus` repo to the YUM / DNF repo list.
 
