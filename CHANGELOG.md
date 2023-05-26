@@ -4,6 +4,8 @@ This file is used to list changes made in each version of the yum-almalinux cook
 
 ## Unreleased
 
+- Add renovate.json
+
 ## 1.0.0 - *2023-02-02*
 
 Initial release. Adds resources for the following AlmaLinux repositories:
