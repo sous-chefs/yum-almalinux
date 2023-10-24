@@ -6,6 +6,9 @@ This file is used to list changes made in each version of the yum-almalinux cook
 
 - Standardise files with files in the repo-management
 
+## 1.1.3 - *2023-09-29*
+
+
 ## 1.1.2 - *2023-09-04*
 
 - Standardise files with files in the repo-management
