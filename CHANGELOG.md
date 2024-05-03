@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of the yum-almalinux cookbook.
 
-## Unreleased
+## 1.1.7 - *2024-05-03*
 
 ## 1.1.6 - *2023-12-21*
 
