@@ -1,15 +1,17 @@
-provides :yum_alma_powertools
+provides :yum_alma_synergy
 unified_mode true
 
 use '_partials/_common'
 
-property :baseurl, [String, nil], default: lazy { alma_repo_baseurl(alma_powertools_repo_name) }
-property :mirrorlist,  [String, nil], default: lazy { alma_repo_mirrorlist(alma_powertools_repo_name) }
-property :description, String, default: lazy { alma_repo_description(alma_powertools_repo_name) }
+repo_name = 'synergy'
 
-property :debug_baseurl, [String, nil], default: lazy { alma_repo_baseurl(alma_powertools_repo_name, true) }
-property :debug_mirrorlist,  [String, nil], default: lazy { alma_repo_mirrorlist(alma_powertools_repo_name, true) }
-property :debug_description, String, default: lazy { alma_repo_description(alma_powertools_repo_name, true) }
+property :baseurl, [String, nil], default: lazy { alma_repo_baseurl(repo_name) }
+property :mirrorlist, [String, nil], default: lazy { alma_repo_mirrorlist(repo_name) }
+property :description, String, default: lazy { alma_repo_description(repo_name) }
+
+property :debug_baseurl, [String, nil], default: lazy { alma_repo_baseurl(repo_name, true) }
+property :debug_mirrorlist, [String, nil], default: lazy { alma_repo_mirrorlist(repo_name, true) }
+property :debug_description, String, default: lazy { alma_repo_description(repo_name, true) }
 
 action_class do
   include YumAlmaChef::Cookbook::Helpers
@@ -25,7 +27,7 @@ action :create do
     end
   end
 
-  yum_repository alma_powertools_repo_name.downcase do
+  yum_repository repo_name.downcase do
     baseurl new_resource.baseurl
     mirrorlist new_resource.mirrorlist
     description new_resource.description
@@ -37,7 +39,7 @@ action :create do
     end
   end
 
-  yum_repository "#{alma_powertools_repo_name.downcase}-debuginfo" do
+  yum_repository "#{repo_name.downcase}-debuginfo" do
     baseurl new_resource.debug_baseurl
     mirrorlist new_resource.debug_mirrorlist
     description new_resource.debug_description

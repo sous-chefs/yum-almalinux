@@ -30,6 +30,7 @@ Below is a table showing which repositoryids we can manage that are shipped by d
 | rt              |[yum\_alma\_rt](documentation/yum_alma_rt.md)                            |
 | saphana         |[yum\_alma\_saphana](documentation/yum_alma_saphana.md)                  |
 | sap             |[yum\_alma\_sap](documentation/yum_alma_sap.md)                          |
+| synergy         |[yum\_alma\_synergy](documentation/yum_alma_synergy.md)                  |
 
 ## Requirements
 

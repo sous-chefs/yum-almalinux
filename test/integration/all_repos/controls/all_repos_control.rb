@@ -16,6 +16,7 @@ control 'all_repos' do
     rt
     sap
     saphana
+    synergy
   )
 
   # add the correct of powertools/crb repo for each version
