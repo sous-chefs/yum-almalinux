@@ -13,6 +13,7 @@ ALL_RESOURCE_NAMES = %w(
   rt
   sap
   saphana
+  synergy
 ).freeze
 
 ALL_ALMA_8_REPOS = %w(
@@ -27,6 +28,22 @@ ALL_ALMA_8_REPOS = %w(
   RT
   SAP
   SAPHANA
+  synergy
+).freeze
+
+ALL_ALMA_9_REPOS = %w(
+  AppStream
+  BaseOS
+  CRB
+  extras
+  HighAvailability
+  NFV
+  Plus
+  ResilientStorage
+  RT
+  SAP
+  SAPHANA
+  synergy
 ).freeze
 
 RSpec.configure do |config|

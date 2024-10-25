@@ -19,6 +19,10 @@ module YumAlmaChef
         repo_slug = debug ? "#{repo_slug}-debuginfo" : repo_slug
         "AlmaLinux #{node['platform_version'].to_i} - #{repo_slug}"
       end
+
+      def alma_powertools_repo_name
+        node['platform_version'].to_i == 8 ? 'PowerTools' : 'CRB'
+      end
     end
   end
 end

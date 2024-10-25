@@ -4,6 +4,10 @@ This file is used to list changes made in each version of the yum-almalinux cook
 
 ## Unreleased
 
+- Add synergy repo
+- Fix repo name setting in `yum_alma_powertools` by moving to a helper method
+- Enable AlmaLinux 9 spec tests
+
 ## 1.1.7 - *2024-05-03*
 
 ## 1.1.6 - *2023-12-21*
