@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of the yum-almalinux cookbook.
 
-## Unreleased
+## 1.2.0 - *2024-10-25*
 
 - Add synergy repo
 - Fix repo name setting in `yum_alma_powertools` by moving to a helper method
