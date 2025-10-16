@@ -2,6 +2,13 @@
 
 This file is used to list changes made in each version of the yum-almalinux cookbook.
 
+## [1.2.2](https://github.com/sous-chefs/yum-almalinux/compare/1.2.1...v1.2.2) (2025-10-16)
+
+
+### Bug Fixes
+
+* **ci:** Update workflows to use release pipeline ([#22](https://github.com/sous-chefs/yum-almalinux/issues/22)) ([26383e8](https://github.com/sous-chefs/yum-almalinux/commit/26383e8c41248beddf3ecc4caaa9a5ab3e1d6283))
+
 ## 1.2.0 - *2024-10-25*
 
 * Add synergy repo
