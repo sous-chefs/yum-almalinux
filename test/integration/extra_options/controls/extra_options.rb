@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 include_controls 'common'
 
 control 'extra_options' do

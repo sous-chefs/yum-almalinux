@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 passthrough_props = {
   'exclude' => 'abc efg',
   'priority' => '10',

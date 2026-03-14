@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 unified_mode true
 
 property :gpgkey, String, default: lazy { alma_gpg_key }

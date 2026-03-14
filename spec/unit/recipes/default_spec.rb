@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'yum-almalinux::default' do
@@ -5,8 +7,7 @@ describe 'yum-almalinux::default' do
   step_into :yum_alma_appstream
   step_into :yum_alma_extras
 
-  # TODO: AlmaLinux 9 isn't in fauxhai-ng yet, add tests for 9 once it is added
-  %w(8).each do |v|
+  %w(8 9).each do |v|
     context "almalinux-#{v}" do
       platform 'almalinux', v
       %w(contrib cr debuginfo fasttrack plus powertools).each do |repo|
@@ -14,33 +15,17 @@ describe 'yum-almalinux::default' do
           expect(chef_run).to_not create_yum_repository(repo)
         end
       end
-      case v.to_i
-      when 8
-        it do
-          expect(chef_run).to create_yum_repository('baseos')
-            .with(mirrorlist: 'https://mirrors.almalinux.org/mirrorlist/8/baseos/')
-        end
-        it do
-          expect(chef_run).to create_yum_repository('appstream')
-            .with(mirrorlist: 'https://mirrors.almalinux.org/mirrorlist/8/appstream/')
-        end
-        it do
-          expect(chef_run).to create_yum_repository('extras')
-            .with(mirrorlist: 'https://mirrors.almalinux.org/mirrorlist/8/extras/')
-        end
-      when 9
-        it do
-          expect(chef_run).to create_yum_repository('base')
-            .with(mirrorlist: 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=BaseOS')
-        end
-        it do
-          expect(chef_run).to create_yum_repository('appstream')
-            .with(mirrorlist: 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=AppStream')
-        end
-        it do
-          expect(chef_run).to create_yum_repository('extras')
-            .with(mirrorlist: 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=extras')
-        end
+      it do
+        expect(chef_run).to create_yum_repository('baseos')
+          .with(mirrorlist: "https://mirrors.almalinux.org/mirrorlist/#{v}/baseos/")
+      end
+      it do
+        expect(chef_run).to create_yum_repository('appstream')
+          .with(mirrorlist: "https://mirrors.almalinux.org/mirrorlist/#{v}/appstream/")
+      end
+      it do
+        expect(chef_run).to create_yum_repository('extras')
+          .with(mirrorlist: "https://mirrors.almalinux.org/mirrorlist/#{v}/extras/")
       end
     end
   end

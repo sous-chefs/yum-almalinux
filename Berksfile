@@ -1,5 +1,9 @@
+# frozen_string_literal: true
+
 source 'https://supermarket.chef.io'
 
-cookbook 'yum-almalinux-test', path: 'test/cookbooks/yum-almalinux-test'
-
 metadata
+
+group :integration do
+  cookbook 'yum-almalinux-test', path: 'test/cookbooks/yum-almalinux-test'
+end

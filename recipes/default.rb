@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Author:: Ethan Hampton (<hamptone@osuosl.org>)
 # Cookbook:: yum-almalinux
@@ -16,6 +18,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+Chef.deprecated(:generic, 'The yum-almalinux::default recipe is deprecated and will be removed in a future major version. Use the yum_alma_baseos, yum_alma_extras, and yum_alma_appstream resources directly.')
 
 yum_alma_baseos 'default'
 yum_alma_extras 'default'

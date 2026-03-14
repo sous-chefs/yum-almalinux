@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 provides :yum_alma_powertools
 unified_mode true
 
-use '_partials/_common'
+use '_partial/_common'
 
 property :baseurl, [String, nil], default: lazy { alma_repo_baseurl(alma_powertools_repo_name) }
 property :mirrorlist,  [String, nil], default: lazy { alma_repo_mirrorlist(alma_powertools_repo_name) }
@@ -48,4 +50,14 @@ action :create do
       send(key.to_sym, value)
     end
   end if new_resource.debug_enabled
+end
+
+action :delete do
+  yum_repository alma_powertools_repo_name.downcase do
+    action :remove
+  end
+
+  yum_repository "#{alma_powertools_repo_name.downcase}-debuginfo" do
+    action :remove
+  end
 end
