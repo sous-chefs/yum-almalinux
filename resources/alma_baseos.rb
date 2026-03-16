@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 provides :yum_alma_baseos
 unified_mode true
 
-use '_partials/_common'
+use '_partial/_common'
 
 repo_name = 'BaseOS'
 
@@ -50,4 +52,14 @@ action :create do
       send(key.to_sym, value)
     end
   end if new_resource.debug_enabled
+end
+
+action :delete do
+  yum_repository 'baseos' do
+    action :remove
+  end
+
+  yum_repository 'baseos-debuginfo' do
+    action :remove
+  end
 end

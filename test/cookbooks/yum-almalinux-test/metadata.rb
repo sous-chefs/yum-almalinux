@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 name 'yum-almalinux-test'
 version '0.1.0'
 

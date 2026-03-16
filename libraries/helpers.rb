@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module YumAlmaChef
   module Cookbook
     module Helpers

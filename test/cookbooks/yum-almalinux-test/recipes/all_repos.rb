@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Author:: Ethan Hampton (<hamptone@osuosl.org>)
 # Cookbook:: yum-almalinux-test

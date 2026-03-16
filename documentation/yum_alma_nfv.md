@@ -9,6 +9,7 @@ Adds the `NFV` repo to the YUM / DNF repo list.
 | Action    | Description                    |
 | --------- | ------------------------------ |
 | `:create` | Creates the repo configuration |
+| `:delete` | Removes the repo configuration |
 
 ## Properties
 
@@ -21,6 +22,7 @@ These properties are passed directly through to `yum_repository`. More informati
 | `description`       | `String`        | See [`alma_repo_description`](../libraries/helpers.rb)                                     |
 | `enabled`           | `true`, `false` | `true`                                                                                     |
 | `debug_baseurl`     | `String`        | `https://repo.almalinux.org/...`, see [`alma_repo_baseurl`](../libraries/helpers.rb)       |
+| `debug_mirrorlist`  | `String`        | `https://mirrors.almalinux.org/...`, see [`alma_repo_mirrorlist`](../libraries/helpers.rb) |
 | `debug_description` | `String`        | See [`alma_repo_description`](../libraries/helpers.rb)                                     |
 | `debug_enabled`     | `true`, `false` | `false`                                                                                    |
 | `gpgkey`            | `String`        | `https://repo.almalinux.org/...`, see [`alma_gpg_key`](../libraries/helpers.rb)            |

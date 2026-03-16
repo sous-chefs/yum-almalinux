@@ -1,3 +1,9 @@
 ---
 name: common
 title: Common controls
+maintainer: Sous Chefs
+license: Apache-2.0
+summary: Shared controls verifying AlmaLinux default repo files are cleaned up
+version: 1.0.0
+supports:
+  - platform-family: rhel

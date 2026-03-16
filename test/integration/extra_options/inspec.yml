@@ -1,6 +1,12 @@
 ---
 name: extra_options
 title: Test passing through properties to the inner yum_repository resources
+maintainer: Sous Chefs
+license: Apache-2.0
+summary: Verify that extra_options are correctly passed through to yum_repository resources
+version: 1.0.0
+supports:
+  - platform-family: rhel
 
 depends:
   - name: common

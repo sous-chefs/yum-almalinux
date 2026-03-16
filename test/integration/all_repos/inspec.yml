@@ -1,6 +1,12 @@
 ---
 name: all_repos
 title: Test all AlmaLinux repositories
+maintainer: Sous Chefs
+license: Apache-2.0
+summary: Verify that all AlmaLinux repository resources configure repos correctly
+version: 1.0.0
+supports:
+  - platform-family: rhel
 
 depends:
   - name: common

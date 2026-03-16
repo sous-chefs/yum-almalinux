@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 control 'common' do
   title 'Common controls'
 
