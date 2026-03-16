@@ -2,6 +2,22 @@
 
 This file is used to list changes made in each version of the yum-almalinux cookbook.
 
+## [2.0.0](https://github.com/sous-chefs/yum-almalinux/compare/v1.2.2...v2.0.0) (2026-03-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* the default recipe is deprecated; tests now use the test cookbook recipe directly because deprecations are treated as errors in CI.
+
+### Features
+
+* modernize cookbook to current sous-chefs standards ([#25](https://github.com/sous-chefs/yum-almalinux/issues/25)) ([55cab4a](https://github.com/sous-chefs/yum-almalinux/commit/55cab4a19314bf730a8c74630659affd93ba463f))
+
+
+### Bug Fixes
+
+* **ci:** Update workflows to use release pipeline ([#22](https://github.com/sous-chefs/yum-almalinux/issues/22)) ([26383e8](https://github.com/sous-chefs/yum-almalinux/commit/26383e8c41248beddf3ecc4caaa9a5ab3e1d6283))
+
 ## [1.2.2](https://github.com/sous-chefs/yum-almalinux/compare/1.2.1...v1.2.2) (2025-10-16)
 
 
