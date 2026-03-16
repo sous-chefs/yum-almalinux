@@ -31,7 +31,7 @@ x-verifiers:
 suites:
   - name: default
     run_list:
-      - recipe[yum-almalinux::default]
+      - recipe[yum-almalinux-test::default]
     verifier: *default_verifier
   - name: all_repos
     run_list:
