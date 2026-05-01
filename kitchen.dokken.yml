@@ -2,13 +2,16 @@
 driver:
   name: dokken
   privileged: true
-  chef_version: <%= ENV['CHEF_VERSION'] || 'current' %>
+  chef_version: <%= ENV['CHEF_VERSION'] || '19' %>
+  chef_image: cincproject/cinc
 
 transport:
   name: dokken
 
 provisioner:
   name: dokken
+  product_name: cinc
+  chef_binary: /opt/cinc/bin/cinc-client
 
 platforms:
   - name: almalinux-8
