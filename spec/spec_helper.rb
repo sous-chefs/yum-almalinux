@@ -48,6 +48,26 @@ ALL_ALMA_9_REPOS = %w(
   synergy
 ).freeze
 
+ALL_ALMA_10_REPOS = %w(
+  AppStream
+  BaseOS
+  CRB
+  extras
+  HighAvailability
+  NFV
+  Plus
+  RT
+  SAP
+  SAPHANA
+  synergy
+).freeze
+
+ALL_REPOS_BY_ALMA_VERSION = {
+  8 => ALL_ALMA_8_REPOS,
+  9 => ALL_ALMA_9_REPOS,
+  10 => ALL_ALMA_10_REPOS,
+}.freeze
+
 RSpec.configure do |config|
   config.color = true               # Use color in STDOUT
   config.formatter = :documentation # Use the specified formatter

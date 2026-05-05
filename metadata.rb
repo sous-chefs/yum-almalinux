@@ -10,4 +10,4 @@ source_url       'https://github.com/sous-chefs/yum-almalinux'
 issues_url       'https://github.com/sous-chefs/yum-almalinux/issues'
 chef_version     '>= 16.10'
 
-supports 'almalinux'
+supports 'almalinux', '>= 8.0'

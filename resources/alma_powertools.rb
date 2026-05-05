@@ -3,6 +3,8 @@
 provides :yum_alma_powertools
 unified_mode true
 
+include YumAlmaChef::Cookbook::Helpers
+
 use '_partial/_common'
 
 property :baseurl, [String, nil], default: lazy { alma_repo_baseurl(alma_powertools_repo_name) }

@@ -12,14 +12,15 @@ This cookbook is maintained by the Sous Chefs. The Sous Chefs are a community of
 
 ## Overview
 
-The yum-almalinux cookbook takes over management of the default and optional repositoryids that ship with AlmaLinux systems.
+The yum-almalinux cookbook takes over management of the default and optional repository IDs that
+ship with AlmaLinux systems.
 
-Below is a table showing which repositoryids we can manage that are shipped by default with AlmaLinux:
+Below is a table showing which AlmaLinux repository IDs this cookbook can manage:
 
 | Repo ID         | Resource Name                                                           |
 | --------------- | :---------------------------------------------------------------------: |
 | appstream       |[yum\_alma\_appstream](documentation/yum_alma_appstream.md)              |
-| baseos          |[yum\_alma\_base](documentation/yum_alma_baseos.md)                      |
+| baseos          |[yum\_alma\_baseos](documentation/yum_alma_baseos.md)                    |
 | extras          |[yum\_alma\_extras](documentation/yum_alma_extras.md)                    |
 | highavailability|[yum\_alma\_ha](documentation/yum_alma_ha.md)                            |
 | nfv             |[yum\_alma\_nfv](documentation/yum_alma_nfv.md)                          |
@@ -36,7 +37,7 @@ Below is a table showing which repositoryids we can manage that are shipped by d
 
 ### Platforms
 
-- AlmaLinux 8, 9
+- AlmaLinux 8, 9, 10
 
 ### Chef
 
@@ -46,17 +47,14 @@ Below is a table showing which repositoryids we can manage that are shipped by d
 
 - none
 
-## Recipes
-
-It is _highly recommended_ to use the resources directly instead of the recipe. The recipes are only included to ease
-adoption and use, however if customization is needed, you _must_ use the custom resource.
-
-- `yum-almalinux::default` - Generates `yum_repository` configs for latest AlmaLinux release using default settings. By
-  default the `base`, `extras`, and `appstream` repos are enabled on AlmaLinux 8/9.
-
 ## Resources
 
 [See resource table in overview](#overview)
+
+## Migration
+
+This cookbook is resource-only. See [migration.md](migration.md) for replacing the removed
+`yum-almalinux::default` recipe with explicit resources.
 
 ## Contributors
 

@@ -7,7 +7,7 @@ describe 'All Resources' do
     step_into :"yum_alma_#{name}"
   end
 
-  %w(8 9).each do |v|
+  %w(8 9 10).each do |v|
     context "almalinux-#{v} default-properties" do
       cached(:subject) { chef_run }
       platform 'almalinux', v
@@ -18,52 +18,32 @@ describe 'All Resources' do
         end
       end
 
-      case v.to_i
-      when 8
-        ALL_ALMA_8_REPOS.each do |repo|
-          it do
-            expect(chef_run).to create_yum_repository(repo.downcase)
-              .with(
-                mirrorlist: "https://mirrors.almalinux.org/mirrorlist/8/#{repo.downcase}/",
-                baseurl: "https://repo.almalinux.org/almalinux/8/#{repo}/$basearch/os/",
-                enabled: true,
-                gpgcheck: true,
-                gpgkey: 'https://repo.almalinux.org/almalinux/RPM-GPG-KEY-AlmaLinux-8'
-              )
-          end
-          it do
-            expect(chef_run).to_not create_yum_repository("#{repo.downcase}-debuginfo")
-              .with(
-                mirrorlist: "https://mirrors.almalinux.org/mirrorlist/8/#{repo.downcase}-debuginfo/",
-                baseurl: "https://repo.almalinux.org/almalinux/8/#{repo}/debug/$basearch/os/",
-                enabled: false,
-                gpgcheck: true,
-                gpgkey: 'https://repo.almalinux.org/almalinux/RPM-GPG-KEY-AlmaLinux-8'
-              )
-          end
+      ALL_REPOS_BY_ALMA_VERSION[v.to_i].each do |repo|
+        it do
+          expect(chef_run).to create_yum_repository(repo.downcase)
+            .with(
+              mirrorlist: "https://mirrors.almalinux.org/mirrorlist/#{v}/#{repo.downcase}/",
+              baseurl: "https://repo.almalinux.org/almalinux/#{v}/#{repo}/$basearch/os/",
+              enabled: true,
+              gpgcheck: true,
+              gpgkey: "https://repo.almalinux.org/almalinux/RPM-GPG-KEY-AlmaLinux-#{v}"
+            )
         end
-      when 9
-        ALL_ALMA_9_REPOS.each do |repo|
-          it do
-            expect(chef_run).to create_yum_repository(repo.downcase)
-              .with(
-                mirrorlist: "https://mirrors.almalinux.org/mirrorlist/9/#{repo.downcase}/",
-                baseurl: "https://repo.almalinux.org/almalinux/9/#{repo}/$basearch/os/",
-                enabled: true,
-                gpgcheck: true,
-                gpgkey: 'https://repo.almalinux.org/almalinux/RPM-GPG-KEY-AlmaLinux-9'
-              )
-          end
-          it do
-            expect(chef_run).to_not create_yum_repository("#{repo.downcase}-debuginfo")
-              .with(
-                mirrorlist: "https://mirrors.almalinux.org/mirrorlist/9/#{repo.downcase}-debuginfo/",
-                baseurl: "https://repo.almalinux.org/almalinux/9/#{repo}/debug/$basearch/os/",
-                enabled: false,
-                gpgcheck: true,
-                gpgkey: 'https://repo.almalinux.org/almalinux/RPM-GPG-KEY-AlmaLinux-9'
-              )
-          end
+        it do
+          expect(chef_run).to_not create_yum_repository("#{repo.downcase}-debuginfo")
+            .with(
+              mirrorlist: "https://mirrors.almalinux.org/mirrorlist/#{v}/#{repo.downcase}-debuginfo/",
+              baseurl: "https://repo.almalinux.org/almalinux/#{v}/#{repo}/debug/$basearch/os/",
+              enabled: false,
+              gpgcheck: true,
+              gpgkey: "https://repo.almalinux.org/almalinux/RPM-GPG-KEY-AlmaLinux-#{v}"
+            )
+        end
+      end
+
+      if v.to_i >= 10
+        it do
+          expect(chef_run).to_not create_yum_repository('resilientstorage')
         end
       end
     end
@@ -90,82 +70,42 @@ describe 'All Resources' do
         end
       end
 
-      case v.to_i
-      when 8
-        ALL_ALMA_8_REPOS.each do |repo|
-          # we aren't using the stylized name for any parts of these tests so downcase the repo name
-          repo = repo.downcase
-          repoName = repo
+      ALL_REPOS_BY_ALMA_VERSION[v.to_i].each do |repo|
+        # we aren't using the stylized name for any parts of these tests so downcase the repo name
+        repo = repo.downcase
+        repo_name = repo
 
-          # highavailbility => ha
-          # only repo where the resource and repo names differ, so switch for ease of testing
-          if repo == 'highavailability'
-            repo = 'ha'
-          end
-
-          it do
-            expect(chef_run).to create_yum_repository(repoName)
-              .with(
-                mirrorlist: "test-mirror-list/#{repo}",
-                baseurl: "test-base-url/#{repo}",
-                description: "test description for #{repo}",
-                enabled: false,
-                gpgcheck: false,
-                gpgkey: 'a-fake-key',
-                exclude: 'excluded-package'
-              )
-          end
-          it do
-            expect(chef_run).to create_yum_repository("#{repoName}-debuginfo")
-              .with(
-                mirrorlist: "debug-mirror-list/#{repo}",
-                baseurl: "debug-base-url/#{repo}",
-                description: "debug description for #{repo}",
-                enabled: true,
-                gpgcheck: false,
-                gpgkey: 'a-fake-key',
-                exclude: 'excluded-package'
-              )
-          end
+        # highavailability => ha
+        # crb => powertools
+        if repo == 'highavailability'
+          repo = 'ha'
+        elsif repo == 'crb'
+          repo = 'powertools'
         end
-      when 9
-        ALL_ALMA_9_REPOS.each do |repo|
-          # we aren't using the stylized name for any parts of these tests so downcase the repo name
-          repo = repo.downcase
-          repoName = repo
 
-          # highavailbility => ha
-          # crb => powertools
-          if repo == 'highavailability'
-            repo = 'ha'
-          elsif repo == 'crb'
-            repo = 'powertools'
-          end
-
-          it do
-            expect(chef_run).to create_yum_repository(repoName)
-              .with(
-                mirrorlist: "test-mirror-list/#{repo}",
-                baseurl: "test-base-url/#{repo}",
-                description: "test description for #{repo}",
-                enabled: false,
-                gpgcheck: false,
-                gpgkey: 'a-fake-key',
-                exclude: 'excluded-package'
-              )
-          end
-          it do
-            expect(chef_run).to create_yum_repository("#{repoName}-debuginfo")
-              .with(
-                mirrorlist: "debug-mirror-list/#{repo}",
-                baseurl: "debug-base-url/#{repo}",
-                description: "debug description for #{repo}",
-                enabled: true,
-                gpgcheck: false,
-                gpgkey: 'a-fake-key',
-                exclude: 'excluded-package'
-              )
-          end
+        it do
+          expect(chef_run).to create_yum_repository(repo_name)
+            .with(
+              mirrorlist: "test-mirror-list/#{repo}",
+              baseurl: "test-base-url/#{repo}",
+              description: "test description for #{repo}",
+              enabled: false,
+              gpgcheck: false,
+              gpgkey: 'a-fake-key',
+              exclude: 'excluded-package'
+            )
+        end
+        it do
+          expect(chef_run).to create_yum_repository("#{repo_name}-debuginfo")
+            .with(
+              mirrorlist: "debug-mirror-list/#{repo}",
+              baseurl: "debug-base-url/#{repo}",
+              description: "debug description for #{repo}",
+              enabled: true,
+              gpgcheck: false,
+              gpgkey: 'a-fake-key',
+              exclude: 'excluded-package'
+            )
         end
       end
     end

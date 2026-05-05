@@ -14,18 +14,19 @@ control 'all_repos' do
     highavailability
     nfv
     plus
-    resilientstorage
     rt
     sap
     saphana
     synergy
   )
 
-  # add the correct of powertools/crb repo for each version
+  repos.append('resilientstorage') if os_release < 10
+
+  # add the correct powertools/crb repo for each version
   case os_release
   when 8
     repos.append('powertools')
-  when 9
+  when 9, 10
     repos.append('crb')
   end
 

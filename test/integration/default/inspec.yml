@@ -5,8 +5,6 @@ maintainer: Sous Chefs
 license: Apache-2.0
 summary: Verify that default AlmaLinux repos are enabled and optional repos are absent
 version: 1.0.0
-supports:
-  - platform-family: rhel
 
 depends:
   - name: common

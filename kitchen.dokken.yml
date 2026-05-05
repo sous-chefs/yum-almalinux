@@ -20,3 +20,8 @@ platforms:
     driver:
       image: dokken/almalinux-9
       pid_one_command: /usr/lib/systemd/systemd
+
+  - name: almalinux-10
+    driver:
+      image: dokken/almalinux-10
+      pid_one_command: /usr/lib/systemd/systemd

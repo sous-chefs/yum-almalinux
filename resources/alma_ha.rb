@@ -3,6 +3,8 @@
 provides :yum_alma_ha
 unified_mode true
 
+include YumAlmaChef::Cookbook::Helpers
+
 use '_partial/_common'
 
 repo_name = 'HighAvailability'

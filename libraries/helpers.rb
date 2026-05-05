@@ -28,5 +28,3 @@ module YumAlmaChef
     end
   end
 end
-
-Chef::Resource.include ::YumAlmaChef::Cookbook::Helpers

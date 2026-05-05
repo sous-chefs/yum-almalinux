@@ -4,6 +4,9 @@
 
 Adds the `ResilientStorage` repo to the YUM / DNF repo list.
 
+This resource is a no-op on AlmaLinux 10 and newer because the standard AlmaLinux 10 repository
+tree does not publish `ResilientStorage`.
+
 ## Actions
 
 | Action    | Description                    |

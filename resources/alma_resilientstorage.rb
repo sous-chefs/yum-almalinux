@@ -3,6 +3,8 @@
 provides :yum_alma_resilientstorage
 unified_mode true
 
+include YumAlmaChef::Cookbook::Helpers
+
 use '_partial/_common'
 
 repo_name = 'ResilientStorage'
@@ -21,6 +23,7 @@ end
 
 action :create do
   return unless platform_family?('rhel')
+  return if node['platform_version'].to_i >= 10
 
   # remove existing repo configs
   ::Dir['/etc/yum.repos.d/almalinux*'].each do |f|
