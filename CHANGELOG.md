@@ -2,6 +2,17 @@
 
 This file is used to list changes made in each version of the yum-almalinux cookbook.
 
+## [3.0.0](https://github.com/sous-chefs/yum-almalinux/compare/v2.0.0...v3.0.0) (2026-05-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate yum-almalinux to custom resources ([#31](https://github.com/sous-chefs/yum-almalinux/issues/31))
+
+### Features
+
+* migrate yum-almalinux to custom resources ([#31](https://github.com/sous-chefs/yum-almalinux/issues/31)) ([838c130](https://github.com/sous-chefs/yum-almalinux/commit/838c130ac26fd27766864099c626f8652ea4f170))
+
 ## [2.0.0](https://github.com/sous-chefs/yum-almalinux/compare/v1.2.2...v2.0.0) (2026-03-16)
 
 
