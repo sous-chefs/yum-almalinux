@@ -2,8 +2,8 @@
 
 #
 # Author:: Ethan Hampton (<hamptone@osuosl.org>)
-# Cookbook:: yum-almalinux
-# Recipe:: default
+# Cookbook:: test
+# Recipe:: all
 #
 # Copyright:: 2023, Oregon State University
 #
@@ -19,8 +19,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-Chef.deprecated(:generic, 'The yum-almalinux::default recipe is deprecated and will be removed in a future major version. Use the yum_alma_baseos, yum_alma_extras, and yum_alma_appstream resources directly.')
-
-yum_alma_baseos 'default'
-yum_alma_extras 'default'
-yum_alma_appstream 'default'
+yum_alma_baseos 'default1'
+yum_alma_extras 'default2'
+yum_alma_appstream 'default3'
+yum_alma_ha 'default4'
+yum_alma_nfv 'default5'
+yum_alma_plus 'default6'
+yum_alma_powertools 'default7'
+if node['platform_version'].to_i < 10
+  yum_alma_resilientstorage 'default8'
+end
+yum_alma_rt 'default9'
+yum_alma_sap 'default10'
+yum_alma_saphana 'default11'
+yum_alma_synergy 'default12'
