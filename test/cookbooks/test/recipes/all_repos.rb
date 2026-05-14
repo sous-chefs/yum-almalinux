@@ -34,3 +34,6 @@ yum_alma_sap 'default10'
 yum_alma_saphana 'default11'
 yum_alma_synergy 'default12'
 yum_alma_testing 'default13'
+if node['platform_version'].to_i >= 9
+  yum_alma_nvidia 'default14'
+end

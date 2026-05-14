@@ -7,6 +7,7 @@ control 'common' do
     crb
     ha
     nfv
+    nvidia
     plus
     powertools
     resilientstorage

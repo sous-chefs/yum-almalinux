@@ -132,6 +132,80 @@ module YumAlmaChef
           action :remove
         end
       end
+
+      def alma_nvidia_baseurl(debug = false)
+        v = node['platform_version'].to_i
+        return "https://vault.almalinux.org/almalinux-nvidia/#{v}/debug/$basearch/" if debug
+        "https://nvidia.repo.almalinux.org/cuda/#{v}/$basearch/"
+      end
+
+      def alma_nvidia_description(debug = false)
+        v = node['platform_version'].to_i
+        suffix = debug ? ' debuginfo' : ' & CUDA'
+        "AlmaLinux #{v} - NVIDIA Driver#{suffix}"
+      end
+
+      def alma_nvidia_gpgkeys
+        v = node['platform_version'].to_i
+        [
+          "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux-#{v}",
+          "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-NVIDIA-CUDA-#{v}",
+        ]
+      end
+
+      def create_alma_nvidia_repo
+        return unless platform_family?('rhel')
+        return if node['platform_version'].to_i < 9 # no almalinux-release-nvidia-driver on AlmaLinux 8
+
+        # The NVIDIA-CUDA GPG key needed to verify CUDA RPMs is only
+        # available from this release package — there is no HTTPS-served
+        # mirror of the key. The .repo file it also drops is cleaned up
+        # below and replaced with a Chef-managed one.
+        package 'almalinux-release-nvidia-driver'
+
+        ::Dir['/etc/yum.repos.d/almalinux*'].each do |f|
+          file f do
+            action :delete
+          end
+        end
+
+        # Resource name 'nvidia' (not 'almalinux-nvidia') keeps the file
+        # outside the almalinux* cleanup glob — same reasoning as the
+        # testing resource.
+        yum_repository 'nvidia' do
+          baseurl new_resource.baseurl
+          description new_resource.description
+          enabled new_resource.enabled
+          gpgcheck new_resource.gpgcheck
+          gpgkey new_resource.gpgkey
+          new_resource.extra_options.each do |key, value|
+            send(key.to_sym, value)
+          end
+        end
+
+        return unless new_resource.debug_enabled
+
+        yum_repository 'nvidia-debuginfo' do
+          baseurl new_resource.debug_baseurl
+          description new_resource.debug_description
+          enabled new_resource.debug_enabled
+          gpgcheck new_resource.gpgcheck
+          gpgkey new_resource.gpgkey
+          new_resource.extra_options.each do |key, value|
+            send(key.to_sym, value)
+          end
+        end
+      end
+
+      def delete_alma_nvidia_repo
+        yum_repository 'nvidia' do
+          action :remove
+        end
+
+        yum_repository 'nvidia-debuginfo' do
+          action :remove
+        end
+      end
     end
   end
 end

@@ -32,3 +32,9 @@ end
 yum_alma_testing 'default' do
   extra_options passthrough_props
 end
+
+if node['platform_version'].to_i >= 9
+  yum_alma_nvidia 'default' do
+    extra_options passthrough_props
+  end
+end
