@@ -2,6 +2,14 @@
 
 This file is used to list changes made in each version of the yum-almalinux cookbook.
 
+## [3.1.0](https://github.com/sous-chefs/yum-almalinux/compare/v3.0.0...v3.1.0) (2026-05-14)
+
+
+### Features
+
+* add yum_alma_nvidia resource for the AlmaLinux NVIDIA CUDA repo ([7134ff2](https://github.com/sous-chefs/yum-almalinux/commit/7134ff2835cbb416329a213eae854574d181b338))
+* add yum_alma_testing resource for the AlmaLinux testing repo ([e45f269](https://github.com/sous-chefs/yum-almalinux/commit/e45f269f4b475f0a756c3480ca36d12188bed70e))
+
 ## [3.0.0](https://github.com/sous-chefs/yum-almalinux/compare/v2.0.0...v3.0.0) (2026-05-05)
 
 
