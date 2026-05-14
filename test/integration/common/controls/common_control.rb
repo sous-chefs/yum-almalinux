@@ -14,6 +14,7 @@ control 'common' do
     sap
     saphana
     synergy
+    testing
   ).each do |name|
     describe file "/etc/yum.repos.d/almalinux-#{name}.repo" do
       it { should_not exist }

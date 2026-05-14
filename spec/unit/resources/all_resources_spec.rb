@@ -6,6 +6,7 @@ describe 'All Resources' do
   ALL_RESOURCE_NAMES.each do |name|
     step_into :"yum_alma_#{name}"
   end
+  step_into :yum_alma_testing
 
   %w(8 9 10).each do |v|
     context "almalinux-#{v} default-properties" do
@@ -45,6 +46,73 @@ describe 'All Resources' do
         it do
           expect(chef_run).to_not create_yum_repository('resilientstorage')
         end
+      end
+    end
+
+    context "almalinux-#{v} testing default-properties" do
+      platform 'almalinux', v
+      cached(:subject) { chef_run }
+
+      recipe do
+        yum_alma_testing 'default'
+      end
+
+      it do
+        expect(chef_run).to create_yum_repository('testing')
+          .with(
+            baseurl: "https://vault.almalinux.org/#{v}/testing/$basearch/os/",
+            description: "AlmaLinux #{v} - Testing",
+            enabled: false,
+            gpgcheck: true,
+            gpgkey: "https://repo.almalinux.org/almalinux/RPM-GPG-KEY-AlmaLinux-#{v}"
+          )
+      end
+
+      it do
+        expect(chef_run).to_not create_yum_repository('testing-debuginfo')
+      end
+    end
+
+    context "almalinux-#{v} testing changed-properties" do
+      platform 'almalinux', v
+      cached(:subject) { chef_run }
+
+      recipe do
+        yum_alma_testing 'default' do
+          baseurl 'test-base-url/testing'
+          description 'test description for testing'
+          enabled true
+          gpgkey 'a-fake-key'
+          gpgcheck false
+          debug_enabled true
+          debug_baseurl 'debug-base-url/testing'
+          debug_description 'debug description for testing'
+          extra_options({ 'exclude' => 'excluded-package' })
+        end
+      end
+
+      it do
+        expect(chef_run).to create_yum_repository('testing')
+          .with(
+            baseurl: 'test-base-url/testing',
+            description: 'test description for testing',
+            enabled: true,
+            gpgcheck: false,
+            gpgkey: 'a-fake-key',
+            exclude: 'excluded-package'
+          )
+      end
+
+      it do
+        expect(chef_run).to create_yum_repository('testing-debuginfo')
+          .with(
+            baseurl: 'debug-base-url/testing',
+            description: 'debug description for testing',
+            enabled: true,
+            gpgcheck: false,
+            gpgkey: 'a-fake-key',
+            exclude: 'excluded-package'
+          )
       end
     end
 

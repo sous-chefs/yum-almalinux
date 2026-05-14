@@ -28,3 +28,7 @@ if node['platform_version'].to_i < 10
     extra_options passthrough_props
   end
 end
+
+yum_alma_testing 'default' do
+  extra_options passthrough_props
+end

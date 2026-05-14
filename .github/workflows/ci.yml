@@ -30,6 +30,7 @@ jobs:
           - default
           - all-repos
           - extra-options
+          - testing-workflow
       fail-fast: false
 
     steps:

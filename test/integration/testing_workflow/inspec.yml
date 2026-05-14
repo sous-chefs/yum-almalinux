@@ -1,0 +1,11 @@
+---
+name: testing_workflow
+title: Verify Chef cleanly owns testing repo state after the upstream RPM is installed
+maintainer: Sous Chefs
+license: Apache-2.0
+summary: Verify Chef takes over testing-repo state cleanly on a system where almalinux-release-testing is already installed
+version: 1.0.0
+
+depends:
+  - name: common
+    path: test/integration/common

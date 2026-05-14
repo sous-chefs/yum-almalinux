@@ -32,6 +32,7 @@ Below is a table showing which AlmaLinux repository IDs this cookbook can manage
 | saphana         |[yum\_alma\_saphana](documentation/yum_alma_saphana.md)                  |
 | sap             |[yum\_alma\_sap](documentation/yum_alma_sap.md)                          |
 | synergy         |[yum\_alma\_synergy](documentation/yum_alma_synergy.md)                  |
+| testing         |[yum\_alma\_testing](documentation/yum_alma_testing.md)                  |
 
 ## Requirements
 
