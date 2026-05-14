@@ -24,6 +24,7 @@ Below is a table showing which AlmaLinux repository IDs this cookbook can manage
 | extras          |[yum\_alma\_extras](documentation/yum_alma_extras.md)                    |
 | highavailability|[yum\_alma\_ha](documentation/yum_alma_ha.md)                            |
 | nfv             |[yum\_alma\_nfv](documentation/yum_alma_nfv.md)                          |
+| nvidia          |[yum\_alma\_nvidia](documentation/yum_alma_nvidia.md)                    |
 | plus            |[yum\_alma\_plus](documentation/yum_alma_plus.md)                        |
 | powertools/crb  |[yum\_alma\_powertools](documentation/yum_alma_powertools.md)            |
 | realtime        |[yum\_alma\_rt](documentation/yum_alma_rt.md)                            |

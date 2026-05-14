@@ -57,4 +57,19 @@ control 'extra_options' do
   describe yum.repo 'testing-debuginfo' do
     it { should_not exist }
   end
+
+  if os_release >= 9
+    describe yum.repo 'nvidia' do
+      it { should exist }
+      it { should be_enabled }
+    end
+
+    describe parse_config_file('/etc/yum.repos.d/nvidia.repo') do
+      its('nvidia') { should include({ 'exclude' => 'abc efg', 'priority' => '10' }) }
+    end
+
+    describe yum.repo 'nvidia-debuginfo' do
+      it { should_not exist }
+    end
+  end
 end

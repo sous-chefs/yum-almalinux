@@ -51,4 +51,19 @@ control 'all_repos' do
   describe yum.repo 'testing-debuginfo' do
     it { should_not exist }
   end
+
+  if os_release >= 9
+    describe yum.repo 'nvidia' do
+      it { should exist }
+      it { should be_enabled }
+    end
+
+    describe yum.repo 'nvidia-debuginfo' do
+      it { should_not exist }
+    end
+
+    describe command('dnf -q --enablerepo=nvidia makecache') do
+      its('exit_status') { should eq 0 }
+    end
+  end
 end

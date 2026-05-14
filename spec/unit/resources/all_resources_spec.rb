@@ -7,6 +7,7 @@ describe 'All Resources' do
     step_into :"yum_alma_#{name}"
   end
   step_into :yum_alma_testing
+  step_into :yum_alma_nvidia
 
   %w(8 9 10).each do |v|
     context "almalinux-#{v} default-properties" do
@@ -113,6 +114,89 @@ describe 'All Resources' do
             gpgkey: 'a-fake-key',
             exclude: 'excluded-package'
           )
+      end
+    end
+
+    context "almalinux-#{v} nvidia default-properties" do
+      platform 'almalinux', v
+      cached(:subject) { chef_run }
+
+      recipe do
+        yum_alma_nvidia 'default'
+      end
+
+      if v.to_i >= 9
+        it do
+          expect(chef_run).to install_package('almalinux-release-nvidia-driver')
+        end
+
+        it do
+          expect(chef_run).to create_yum_repository('nvidia')
+            .with(
+              baseurl: "https://nvidia.repo.almalinux.org/cuda/#{v}/$basearch/",
+              description: "AlmaLinux #{v} - NVIDIA Driver & CUDA",
+              enabled: true,
+              gpgcheck: true,
+              gpgkey: [
+                "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux-#{v}",
+                "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-NVIDIA-CUDA-#{v}",
+              ]
+            )
+        end
+
+        it do
+          expect(chef_run).to_not create_yum_repository('nvidia-debuginfo')
+        end
+      else
+        it 'is a no-op on AlmaLinux 8' do
+          expect(chef_run).to_not install_package('almalinux-release-nvidia-driver')
+          expect(chef_run).to_not create_yum_repository('nvidia')
+        end
+      end
+    end
+
+    if v.to_i >= 9
+      context "almalinux-#{v} nvidia changed-properties" do
+        platform 'almalinux', v
+        cached(:subject) { chef_run }
+
+        recipe do
+          yum_alma_nvidia 'default' do
+            baseurl 'test-base-url/nvidia'
+            description 'test description for nvidia'
+            enabled false
+            gpgkey 'a-fake-key'
+            gpgcheck false
+            debug_enabled true
+            debug_baseurl 'debug-base-url/nvidia'
+            debug_description 'debug description for nvidia'
+            extra_options({ 'exclude' => 'excluded-package' })
+          end
+        end
+
+        it do
+          expect(chef_run).to create_yum_repository('nvidia')
+            .with(
+              baseurl: 'test-base-url/nvidia',
+              description: 'test description for nvidia',
+              enabled: false,
+              gpgcheck: false,
+              gpgkey: 'a-fake-key',
+              exclude: 'excluded-package'
+            )
+        end
+
+        it do
+          expect(chef_run).to create_yum_repository('nvidia-debuginfo')
+            .with(
+              baseurl: 'debug-base-url/nvidia',
+              description: 'debug description for nvidia',
+              enabled: true,
+              gpgcheck: false,
+              gpgkey: 'a-fake-key',
+              exclude: 'excluded-package'
+            )
+        end
       end
     end
 
