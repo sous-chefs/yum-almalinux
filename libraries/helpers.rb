@@ -25,6 +25,53 @@ module YumAlmaChef
       def alma_powertools_repo_name
         node['platform_version'].to_i == 8 ? 'PowerTools' : 'CRB'
       end
+
+      def create_alma_repo(repo_name)
+        return unless platform_family?('rhel')
+
+        # remove existing repo configs shipped by AlmaLinux
+        ::Dir['/etc/yum.repos.d/almalinux*'].each do |f|
+          file f do
+            action :delete
+          end
+        end
+
+        yum_repository repo_name.downcase do
+          baseurl new_resource.baseurl
+          mirrorlist new_resource.mirrorlist
+          description new_resource.description
+          enabled new_resource.enabled
+          gpgcheck new_resource.gpgcheck
+          gpgkey new_resource.gpgkey
+          new_resource.extra_options.each do |key, value|
+            send(key.to_sym, value)
+          end
+        end
+
+        return unless new_resource.debug_enabled
+
+        yum_repository "#{repo_name.downcase}-debuginfo" do
+          baseurl new_resource.debug_baseurl
+          mirrorlist new_resource.debug_mirrorlist
+          description new_resource.debug_description
+          enabled new_resource.debug_enabled
+          gpgcheck new_resource.gpgcheck
+          gpgkey new_resource.gpgkey
+          new_resource.extra_options.each do |key, value|
+            send(key.to_sym, value)
+          end
+        end
+      end
+
+      def delete_alma_repo(repo_name)
+        yum_repository repo_name.downcase do
+          action :remove
+        end
+
+        yum_repository "#{repo_name.downcase}-debuginfo" do
+          action :remove
+        end
+      end
     end
   end
 end
