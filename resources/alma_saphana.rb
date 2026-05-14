@@ -22,46 +22,9 @@ action_class do
 end
 
 action :create do
-  return unless platform_family?('rhel')
-
-  # remove existing repo configs
-  ::Dir['/etc/yum.repos.d/almalinux*'].each do |f|
-    file f do
-      action :delete
-    end
-  end
-
-  yum_repository repo_name.downcase do
-    baseurl new_resource.baseurl
-    mirrorlist new_resource.mirrorlist
-    description new_resource.description
-    enabled new_resource.enabled
-    gpgcheck new_resource.gpgcheck
-    gpgkey new_resource.gpgkey
-    new_resource.extra_options.each do |key, value|
-      send(key.to_sym, value)
-    end
-  end
-
-  yum_repository "#{repo_name.downcase}-debuginfo" do
-    baseurl new_resource.debug_baseurl
-    mirrorlist new_resource.debug_mirrorlist
-    description new_resource.debug_description
-    enabled new_resource.debug_enabled
-    gpgcheck new_resource.gpgcheck
-    gpgkey new_resource.gpgkey
-    new_resource.extra_options.each do |key, value|
-      send(key.to_sym, value)
-    end
-  end if new_resource.debug_enabled
+  create_alma_repo(repo_name)
 end
 
 action :delete do
-  yum_repository 'saphana' do
-    action :remove
-  end
-
-  yum_repository 'saphana-debuginfo' do
-    action :remove
-  end
+  delete_alma_repo(repo_name)
 end
