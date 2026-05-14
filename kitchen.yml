@@ -29,6 +29,9 @@ x-verifiers:
   extra_options: &extra_options_verifier
     inspec_tests:
       - path: test/integration/extra_options
+  testing_workflow: &testing_workflow_verifier
+    inspec_tests:
+      - path: test/integration/testing_workflow
 
 x-run_lists:
   default: &default_run_list
@@ -37,6 +40,8 @@ x-run_lists:
     - recipe[test::all_repos]
   extra_options: &extra_options_run_list
     - recipe[test::extra_options]
+  testing_workflow: &testing_workflow_run_list
+    - recipe[test::testing_workflow]
 
 suites:
   - name: default
@@ -48,3 +53,6 @@ suites:
   - name: extra_options
     run_list: *extra_options_run_list
     verifier: *extra_options_verifier
+  - name: testing_workflow
+    run_list: *testing_workflow_run_list
+    verifier: *testing_workflow_verifier

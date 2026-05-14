@@ -42,4 +42,13 @@ control 'all_repos' do
       it { should_not be_enabled }
     end
   end
+
+  describe yum.repo 'testing' do
+    it { should exist }
+    it { should_not be_enabled }
+  end
+
+  describe yum.repo 'testing-debuginfo' do
+    it { should_not exist }
+  end
 end

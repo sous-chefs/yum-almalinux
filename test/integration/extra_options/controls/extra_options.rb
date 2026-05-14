@@ -44,4 +44,17 @@ control 'extra_options' do
       it { should_not be_enabled }
     end
   end
+
+  describe yum.repo 'testing' do
+    it { should exist }
+    it { should_not be_enabled }
+  end
+
+  describe parse_config_file('/etc/yum.repos.d/testing.repo') do
+    its('testing') { should include({ 'exclude' => 'abc efg', 'priority' => '10' }) }
+  end
+
+  describe yum.repo 'testing-debuginfo' do
+    it { should_not exist }
+  end
 end

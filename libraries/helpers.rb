@@ -72,6 +72,66 @@ module YumAlmaChef
           action :remove
         end
       end
+
+      def alma_testing_baseurl(debug = false)
+        path = debug ? 'testing/debug/$basearch/' : 'testing/$basearch/os/'
+        "https://vault.almalinux.org/#{node['platform_version'].to_i}/#{path}"
+      end
+
+      def alma_testing_description(debug = false)
+        suffix = debug ? ' debuginfo' : ''
+        "AlmaLinux #{node['platform_version'].to_i} - Testing#{suffix}"
+      end
+
+      def create_alma_testing_repo
+        return unless platform_family?('rhel')
+
+        # remove existing repo configs shipped by AlmaLinux
+        ::Dir['/etc/yum.repos.d/almalinux*'].each do |f|
+          file f do
+            action :delete
+          end
+        end
+
+        # Resource name is intentionally 'testing' (not 'almalinux-testing'):
+        # yum_repository derives the filename from the resource name, and the
+        # broader cleanup glob above matches /etc/yum.repos.d/almalinux*.
+        # Using 'almalinux-testing' would put the file in the glob's path and
+        # break idempotency across converges.
+        yum_repository 'testing' do
+          baseurl new_resource.baseurl
+          description new_resource.description
+          enabled new_resource.enabled
+          gpgcheck new_resource.gpgcheck
+          gpgkey new_resource.gpgkey
+          new_resource.extra_options.each do |key, value|
+            send(key.to_sym, value)
+          end
+        end
+
+        return unless new_resource.debug_enabled
+
+        yum_repository 'testing-debuginfo' do
+          baseurl new_resource.debug_baseurl
+          description new_resource.debug_description
+          enabled new_resource.debug_enabled
+          gpgcheck new_resource.gpgcheck
+          gpgkey new_resource.gpgkey
+          new_resource.extra_options.each do |key, value|
+            send(key.to_sym, value)
+          end
+        end
+      end
+
+      def delete_alma_testing_repo
+        yum_repository 'testing' do
+          action :remove
+        end
+
+        yum_repository 'testing-debuginfo' do
+          action :remove
+        end
+      end
     end
   end
 end
